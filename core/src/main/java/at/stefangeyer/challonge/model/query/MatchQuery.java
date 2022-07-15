@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class MatchQuery {
+    private boolean isTie;
     private Long winnerId;
     private Integer votesForPlayer1;
     private Integer votesForPlayer2;

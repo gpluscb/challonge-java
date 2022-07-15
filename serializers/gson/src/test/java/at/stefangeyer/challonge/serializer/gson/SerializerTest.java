@@ -35,6 +35,9 @@ public class SerializerTest {
     private final MatchQuery matchQuery = MatchQuery.builder().scoresCsv("3-2,1-3,3-2").votesForPlayer1(14)
             .votesForPlayer2(12).winnerId(12345L).build();
 
+    private final MatchQuery tieMatchQuery = MatchQuery.builder().scoresCsv("3-2,2-3,4-4").votesForPlayer1(11)
+            .votesForPlayer2(13).winnerId(12345L).isTie(true).build();
+
     private final AttachmentQuery attachmentQuery = AttachmentQuery.builder().description("abc")
             .url("https://www.google.com").build();
 
@@ -76,6 +79,13 @@ public class SerializerTest {
                 "\"scores_csv\":\"3-2,1-3,3-2\"}";
 
         assertEquals(matchQueryString, json);
+
+        String tieJson = this.serializer.serialize(this.tieMatchQuery);
+
+        String tieMatchQueryString = "{\"winner_id\":\"tie\",\"player1_votes\":11,\"player2_votes\":13," +
+                "\"scores_csv\":\"3-2,2-3,4-4\"}";
+
+        assertEquals(tieMatchQueryString, tieJson);
     }
 
     @Test

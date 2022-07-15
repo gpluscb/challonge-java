@@ -14,7 +14,9 @@ public class MatchQueryAdapter implements JsonSerializer<MatchQuery> {
     public JsonElement serialize(MatchQuery query, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject entity = new JsonObject();
 
-        if (query.getWinnerId() != null) {
+        if (query.isTie()) {
+            entity.addProperty("winner_id", "tie");
+        } else if (query.getWinnerId() != null) {
             entity.addProperty("winner_id", query.getWinnerId());
         }
 
